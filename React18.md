@@ -143,3 +143,28 @@ export default App;
 
 ### JSX中实现列表渲染
 
+语法：在JSX中可以使用原生JS中的**map方法**遍历渲染列表
+
+```jsx
+const list = [
+  { id: 1001, name: 'Vue' },
+  { id: 1002, name: 'React' },
+  { id: 1003, name: 'Angular' },
+]
+function App() {
+  return (
+    <div className="App">
+      this is app
+      {/* 渲染列表 */}
+      {/* 注意：加上一个独一无二的key */}
+      {/* key的作用：React框架内部使用，提升更新性能 */}
+      <ul>
+        { list.map(item => <li key={item.id}>{item.name}</li>) }
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
