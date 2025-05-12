@@ -13,9 +13,23 @@ function App() {
     setCount(count + 1);
   }
 
+  const [form, setForm] = useState({
+    name: 'jack'
+  })
+  const changeForm = () => {
+    // 错误写法：直接修改
+    // form.name = 'john';
+    // 正确写法：传入一个新的对象
+    setForm({
+      ...form,
+      name: 'john'
+    })
+  }
+
   return (
     <div className="App">
       <button onClick={handleClick}>{count}</button>
+      <button onClick={changeForm}>修改form{form.name}</button>
     </div>
   );
 }
