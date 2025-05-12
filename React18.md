@@ -222,3 +222,53 @@ function App() {
 export default App;
 ```
 
+### React基础事件绑定
+
+语法：**on + 事件名称 = { 事件处理函数 }**，整体上遵循驼峰命名法
+
+#### 传递自定义参数
+
+语法：事件绑定的位置改造成箭头函数的写法，在执行 `handleClick` 实际处理业务函数的时候传递实参
+
+````jsx
+function App() {
+  // const handleClick = (e) => {
+  //   console.log('button被点击了', e)
+  // }
+
+  // 传递自定义参数
+  const handleClick = (name) => {
+    console.log('button被点击了', name)
+  }
+  return (
+    <div className="App">
+      <button onClick={() => handleClick('jack')}>click me</button>
+    </div>
+  );
+}
+
+export default App;
+````
+
+注意：不能直接写函数调用，这里事件绑定需要一个函数引用。
+
+#### 同时传递事件对象和自定义参数
+
+语法：在事件绑定的位置传递事件实参`e`和自定义参数，`handleClick` 中声明形参，注意顺序对应。
+
+```jsx
+function App() {
+  // 同时传递自定义参数和事件对象
+  const handleClick = (name, e) => {
+    console.log('button被点击了', name, e)
+  }
+  return (
+    <div className="App">
+      <button onClick={(e) => handleClick('jack', e)}>click me</button>
+    </div>
+  );
+}
+
+export default App;
+```
+

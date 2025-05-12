@@ -1,22 +1,20 @@
-// 定义文章类型
-const articleType = 3; // 0 1 3
-
-// 定义核心函数（根据文章类型返回不同的JSX模板）
-function getArticleTem() {
-  if (articleType === 0) {
-    return <div>我是无图文章</div>
-  } else if (articleType === 1) {
-    return <div>我是单图文章</div>
-  } else {
-    return <div>我是三图文章</div>
-  }
-}
-
 function App() {
+  // const handleClick = (e) => {
+  //   console.log('button被点击了', e)
+  // }
+
+  // 传递自定义参数
+  // const handleClick = (name) => {
+  //   console.log('button被点击了', name)
+  // }
+
+  // 同时传递自定义参数和事件对象
+  const handleClick = (name, e) => {
+    console.log('button被点击了', name, e)
+  }
   return (
     <div className="App">
-      {/* 调用函数渲染不同的模板 */}
-      { getArticleTem() }
+      <button onClick={(e) => handleClick('jack', e)}>click me</button>
     </div>
   );
 }
