@@ -1,20 +1,17 @@
+// 1.定义组件
+function Button() {
+  // 业务逻辑组件逻辑
+  return <button>click me!</button>
+}
+
 function App() {
-  // const handleClick = (e) => {
-  //   console.log('button被点击了', e)
-  // }
-
-  // 传递自定义参数
-  // const handleClick = (name) => {
-  //   console.log('button被点击了', name)
-  // }
-
-  // 同时传递自定义参数和事件对象
-  const handleClick = (name, e) => {
-    console.log('button被点击了', name, e)
-  }
   return (
     <div className="App">
-      <button onClick={(e) => handleClick('jack', e)}>click me</button>
+      {/* 2.使用组件（渲染组件） */}
+      {/* 自闭和 */}
+      <Button />
+      {/* 成对出现 */}
+      <Button></Button>
     </div>
   );
 }
