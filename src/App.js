@@ -1,35 +1,18 @@
-// useState实现一个计数器按钮
-import { useState } from 'react';
+// 导入样式
+import './index.css';
+
+const style = {
+  color: 'red',
+  fontSize: '50px'
+}
+
 function App() {
-  // 1.调用useState添加一个状态变量
-  // count 状态变量
-  // setCount 修改状态变量的方法
-  const [count, setCount] = useState(0);
-
-  // 2.点击事件回调
-  const handleClick = () => {
-    // 作用：1.用传入的新值修改count
-    // 2.重新使用新的count渲染UI
-    setCount(count + 1);
-  }
-
-  const [form, setForm] = useState({
-    name: 'jack'
-  })
-  const changeForm = () => {
-    // 错误写法：直接修改
-    // form.name = 'john';
-    // 正确写法：传入一个新的对象
-    setForm({
-      ...form,
-      name: 'john'
-    })
-  }
-
   return (
     <div className="App">
-      <button onClick={handleClick}>{count}</button>
-      <button onClick={changeForm}>修改form{form.name}</button>
+      {/* 行内样式控制 */}
+      <span style={style}>this is span</span>
+      {/* 通过class类名控制 */}
+      <span className="foo">this is class foo</span>
     </div>
   );
 }
