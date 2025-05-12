@@ -17,7 +17,7 @@ const defaultList = [
     // 用户信息
     user: {
       uid: '13258165',
-      avatar: '',
+      avatar: 'https://b0.bdstatic.com/60393afb0610f00150bf4d4c244ff4ca.jpg@h_1280',
       uname: '周杰伦',
     },
     // 评论内容
@@ -30,7 +30,7 @@ const defaultList = [
     rpid: 2,
     user: {
       uid: '36080105',
-      avatar: '',
+      avatar: 'https://p0.itc.cn/images01/20230601/2127fd88d1194deb9eb856f5fb376780.jpeg',
       uname: '许嵩',
     },
     content: '我寻你千百度 日出到迟暮',
@@ -78,6 +78,11 @@ const App = () => {
   // 渲染评论列表
   // 1.使用useState维护list
   const [commentList, setCommentList] = useState(defaultList);
+
+  // 删除功能 - 拿到当前项id，以id为条件对评论进行filter过滤
+  const handleDel = (id) => {
+    setCommentList(commentList.filter(item => item.rpid !== id))
+  }
 
   return (
     <div className="app">
@@ -147,10 +152,12 @@ const App = () => {
                     <span className="reply-time">{item.ctime}</span>
                     {/* 评论数量 */}
                     <span className="reply-time">点赞数:{item.like}</span>
-                    <span className="delete-btn">
-                      删除
-                    </span>
-
+                    {/* 删除显示 - 条件渲染 */}
+                    { user.uid === item.user.uid &&
+                        <span className="delete-btn" onClick={() => handleDel(item.rpid)}>
+                          删除
+                        </span>
+                    }
                   </div>
                 </div>
               </div>
