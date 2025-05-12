@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import './App.scss'
 import avatar from './images/bozai.png'
-import { useState } from 'react'
-
+import _ from 'lodash'
 /**
  * 评论列表的渲染和操作
  *
@@ -35,7 +35,7 @@ const defaultList = [
     },
     content: '我寻你千百度 日出到迟暮',
     ctime: '11-13 11:29',
-    like: 88,
+    like: 99,
   },
   {
     rpid: 1,
@@ -77,7 +77,7 @@ const tabs = [
 const App = () => {
   // 渲染评论列表
   // 1.使用useState维护list
-  const [commentList, setCommentList] = useState(defaultList);
+  const [commentList, setCommentList] = useState(_.orderBy(defaultList, 'like', 'desc'));
 
   // 删除功能 - 拿到当前项id，以id为条件对评论进行filter过滤
   const handleDel = (id) => {
@@ -90,6 +90,14 @@ const App = () => {
   const [type, setType] = useState('hot');
   const handleTabChange = (type) => {
     setType(type)
+    // 基于列表的排序
+    if (type === 'hot') {
+      // 根据点赞数量排序
+      setCommentList(_.orderBy(commentList, 'like', 'desc'))
+    } else {
+      // 根据创建时间排序
+      setCommentList(_.orderBy(commentList, 'ctime', 'desc'))
+    }
   }
 
   return (
