@@ -168,3 +168,24 @@ function App() {
 export default App;
 ```
 
+### JSX中实现条件渲染
+
+语法：在React中，可以通过逻辑与运算符&&、三元表达式（?:）实现基础的条件渲染。
+
+```jsx
+const isLogin = true;
+
+function App() {
+  return (
+    <div className="App">
+      {/* 逻辑与 && */}
+      { isLogin && <span>this is span</span> }
+      {/* 三元运算 */}
+      { isLogin ? <span>jack</span> : <span>loading...</span>}
+    </div>
+  );
+}
+
+export default App;
+```
+
