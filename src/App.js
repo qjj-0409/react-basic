@@ -5,22 +5,18 @@
 function Son(props) {
   // props：对象里面包含了父组件传递过来的所有的数据
   console.log(props)
-  return <div>this is son, {props.name}, jsx: {props.child}</div>
+  // props中的数据是只读的
+  // props.name = 'hello'
+  return <div>this is son, {props.children}</div>
 }
 
 const App = () => {
-  const name = 'this is app name';
   return (
     <div className="app">
-      <Son 
-        name={name}
-        age={18}
-        isTrue={false}
-        cb={() => { console.log('123') }}
-        list={['Vue', 'React']}
-        obj={{name: 'jack'}}
-        child={<span>this is span</span>}
-      />
+      <Son>
+        {/* 当我们把内容嵌套在子组件标签中时，父组件会自动在名为children的props属性中接收该内容 */}
+        <span>this is span</span>
+      </Son>
     </div>
   )
 }
