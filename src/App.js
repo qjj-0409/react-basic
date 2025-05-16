@@ -1,20 +1,24 @@
-// 受控表单绑定
+// React中获取DOM
 
-import { useState } from "react"
+import { useRef } from "react"
 
-// 1.声明一个react状态 - useState
-// 2.核心绑定流程
-//   1.通过value属性绑定react状态
-//   2.绑定onChange事件 通过事件参数e拿到输入框最新的值 反向修改到react状态
+// 1.useRef生成ref对象，绑定到dom标签身上
+
+// 2.dom可用时，ref.current可以获取dom
+// 渲染完毕之后（dom生成之后）才可用
+
 const App = () => {
-  const [value, setValue] = useState('')
+  const inputRef = useRef(null);
+  const showDom = () => {
+    console.dir(inputRef.current);
+  }
   return (
     <div className="app">
       <input
         type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        ref={inputRef}
       />
+      <button onClick={showDom}>获取dom</button>
     </div>
   )
 }
