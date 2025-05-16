@@ -1,39 +1,40 @@
-// 1.通过子传父 A -> App
-// 2.通过父传子 App -> B
+// App -> A -> B
+// 1.createContext方法创建一个上下文对象
+// 2.在顶层组件 通过Provider组件提供数组
+// 3.在底层组件 通过useContext钩子函数使用数据
 
-import { useState } from "react"
+import { createContext, useContext } from "react"
 
-const A = ({ onGetName }) => {
-  const name = 'this is A name'
+const MsgContext = createContext()
+
+const A = () => {
   return (
     <div>
       this is A component.
-      <button onClick={() => onGetName(name)}>send</button>
+      <B />
     </div>
   )
 }
 
-const B = ({ name }) => {
+const B = () => {
+  const msg = useContext(MsgContext)
   return (
     <div>
       this is B component.
-      {name}
+      {msg}
     </div>
   )
 }
 
 
 const App = () => {
-  const [name, setName] = useState('')
-  const getName = (name) => {
-    console.log(name)
-    setName(name);
-  }
+  const msg = 'this is app msg';
   return (
     <div>
-      this is App.
-      <A onGetName={getName} />
-      <B name={name} />
+      <MsgContext.Provider value={msg}>
+        this is App.
+        <A />
+      </MsgContext.Provider>
     </div>
   )
 }
