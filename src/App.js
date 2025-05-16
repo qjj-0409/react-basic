@@ -26,9 +26,8 @@ const B = () => {
   )
 }
 
-
 const App = () => {
-  const msg = 'this is app msg';
+  const msg = "this is app msg"
   return (
     <div>
       <MsgContext.Provider value={msg}>
