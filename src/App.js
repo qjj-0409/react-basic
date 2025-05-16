@@ -1,29 +1,39 @@
-// 子传父
-// 核心：在子组件中调用父组件中的函数并传递实参
+// 1.通过子传父 A -> App
+// 2.通过父传子 App -> B
 
-import { useState } from "react";
+import { useState } from "react"
 
-function Son({ onGetSonMsg }) {
-  // Son组件中的数据
-  const sonMsg = 'this is som msg';
+const A = ({ onGetName }) => {
+  const name = 'this is A name'
   return (
     <div>
-      this is son
-      <button onClick={() => onGetSonMsg(sonMsg)}>sendMsg</button>
+      this is A component.
+      <button onClick={() => onGetName(name)}>send</button>
     </div>
   )
 }
 
+const B = ({ name }) => {
+  return (
+    <div>
+      this is B component.
+      {name}
+    </div>
+  )
+}
+
+
 const App = () => {
-  const [msg, setMsg] = useState('')
-  const getMsg = (msg) => {
-    console.log(msg)
-    setMsg(msg)
+  const [name, setName] = useState('')
+  const getName = (name) => {
+    console.log(name)
+    setName(name);
   }
   return (
-    <div className="app">
-      this is app, {msg}
-      <Son onGetSonMsg={getMsg} />
+    <div>
+      this is App.
+      <A onGetName={getName} />
+      <B name={name} />
     </div>
   )
 }
