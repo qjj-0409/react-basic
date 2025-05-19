@@ -80,11 +80,8 @@ const tabs = [
   { type: "time", text: "最新" },
 ]
 
-const App = () => {
-  // 渲染评论列表
-  // 1.使用useState维护list
-  // const [commentList, setCommentList] = useState(_.orderBy(defaultList, "like", "desc"))
-
+// 封装自定义Hook
+function useGetList() {
   // 获取接口渲染
   const [commentList, setCommentList] = useState([])
   useEffect(() => {
@@ -94,6 +91,20 @@ const App = () => {
     }
     getList()
   }, [])
+
+  return {
+    commentList,
+    setCommentList,
+  }
+}
+
+const App = () => {
+  // 渲染评论列表
+  // 1.使用useState维护list
+  // const [commentList, setCommentList] = useState(_.orderBy(defaultList, "like", "desc"))
+
+  // 调用自定义hook
+  const { commentList, setCommentList } = useGetList()
 
   // 删除功能 - 拿到当前项id，以id为条件对评论进行filter过滤
   const handleDel = (id) => {
