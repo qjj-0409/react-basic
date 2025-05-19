@@ -1,16 +1,19 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./App.scss"
-import avatar from "./images/bozai.png"
+// import avatar from "./images/bozai.png"
 import _ from "lodash"
 import classNames from "classnames"
 import { v4 as uuidV4 } from "uuid"
 import dayjs from "dayjs"
+import axios from "axios"
 /**
  * 评论列表的渲染和操作
  *
  * 1. 根据状态渲染评论列表
  * 2. 删除评论
  */
+
+const avatar = "https://pic.rmb.bdstatic.com/bjh/news/f788b2b92ab3298c6f4f81c07abdb988.jpeg"
 
 // 评论列表数据
 const defaultList = [
@@ -80,7 +83,17 @@ const tabs = [
 const App = () => {
   // 渲染评论列表
   // 1.使用useState维护list
-  const [commentList, setCommentList] = useState(_.orderBy(defaultList, "like", "desc"))
+  // const [commentList, setCommentList] = useState(_.orderBy(defaultList, "like", "desc"))
+
+  // 获取接口渲染
+  const [commentList, setCommentList] = useState([])
+  useEffect(() => {
+    async function getList() {
+      const res = await axios.get("http://localhost:3004/list")
+      setCommentList(res.data)
+    }
+    getList()
+  }, [])
 
   // 删除功能 - 拿到当前项id，以id为条件对评论进行filter过滤
   const handleDel = (id) => {
